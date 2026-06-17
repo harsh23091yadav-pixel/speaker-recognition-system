@@ -85,8 +85,8 @@ function Recognition() {
 
     try {
 
-      const response = await fetch(
-        "http://127.0.0.1:8000/recognize",
+     const response = await fetch(
+  "https://speaker-recognition-system-tzg6.onrender.com/recognize",
         {
           method: "POST",
           body: formData,
