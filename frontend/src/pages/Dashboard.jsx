@@ -10,20 +10,22 @@ function Dashboard() {
   const [speakerAFile, setSpeakerAFile] = useState(null);
 
   const [message, setMessage] = useState("");
-
   const [speakers, setSpeakers] = useState([]);
+
+  const API_URL =
+    "https://speaker-recognition-system-tzg6.onrender.com";
 
   const loadSpeakers = async () => {
 
     try {
 
       const response = await fetch(
-        "http://127.0.0.1:8000/speakers"
+        `${API_URL}/speakers`
       );
 
       const data = await response.json();
 
-      setSpeakers(data.speakers);
+      setSpeakers(data.speakers || []);
 
     } catch (error) {
 
@@ -87,8 +89,6 @@ function Dashboard() {
 
     const formData = new FormData();
 
-    formData.append("name", name);
-
     if (audioBlob) {
 
       const recordedFile = new File(
@@ -121,7 +121,7 @@ function Dashboard() {
     try {
 
       const response = await fetch(
-        `http://127.0.0.1:8000/save-speaker?name=${name}`,
+        `${API_URL}/save-speaker?name=${name}`,
         {
           method: "POST",
           body: formData,
